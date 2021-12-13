@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = cloudbowl.samples.dotnet
+build_property.ProjectDir = /home/devstar2007/cloudbowl-microservice-game/samples/dotnet/
