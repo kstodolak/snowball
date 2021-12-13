@@ -81,9 +81,9 @@ app.post('/', function (req, res) {
         return;
     }
 
-    tryToFind();
-    // score = selfInfo.score;
-    // moveOrShot(Math.floor(Math.random() * 10));
+    // tryToFind();
+    score = selfInfo.score;
+    moveOrShot(Math.floor(Math.random() * 10));
 });
 
 app.listen(process.env.PORT || 8080);
