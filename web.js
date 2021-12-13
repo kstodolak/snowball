@@ -21,7 +21,7 @@ app.post('/', function (req, res) {
 
 
     const move = () => {
-        const changeDirection = ['R', 'L'];
+        const changeDirection = ['R'];
         let moves = ['F', 'F', 'R'];
 
         if (selfInfo.x < 3 && selfInfo.direction === 'W') {
