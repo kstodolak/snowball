@@ -7,7 +7,7 @@ let score = 0;
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-  res.send('Let the battle begin! TEST');
+    res.send('Let the battle begin! TEST 2');
 });
 
 app.post('/', function (req, res) {
@@ -20,21 +20,21 @@ app.post('/', function (req, res) {
 
     const move = () => {
         const changeDirection = ['R', 'L'];
-        let moves = ['F']; 
+        let moves = ['F'];
 
-        if(selfInfo.x < 3 && selfInfo.direction === 'W') {
+        if (selfInfo.x < 3 && selfInfo.direction === 'W') {
             moves = moves.concat(changeDirection);
         }
 
-        if(selfInfo.x > req.body.arena.dims[0] - 3 && selfInfo.direction === 'E') {
+        if (selfInfo.x > req.body.arena.dims[0] - 3 && selfInfo.direction === 'E') {
             moves = moves.concat(changeDirection);
         }
 
-        if(selfInfo.y < 3 && selfInfo.direction === 'N') {
+        if (selfInfo.y < 3 && selfInfo.direction === 'N') {
             moves = moves.concat(changeDirection);
         }
 
-        if(selfInfo.x > req.body.arena.dims[1] - 3 && selfInfo.direction === 'S') {
+        if (selfInfo.x > req.body.arena.dims[1] - 3 && selfInfo.direction === 'S') {
             moves = moves.concat(changeDirection);
         }
 
@@ -46,20 +46,20 @@ app.post('/', function (req, res) {
     }
 
     const moveOrShot = (randomNumber) => {
-        if(randomNumber < 5) {
+        if (randomNumber < 5) {
             move();
-        } else{
+        } else {
             shot();
         }
     }
 
-    if(score < selfInfo.score) {
+    if (score < selfInfo.score) {
         score = selfInfo.score;
         shot();
         return;
     }
 
-    if(selfInfo.wasHit) {
+    if (selfInfo.wasHit) {
         score = selfInfo.score;
         move();
         return;
