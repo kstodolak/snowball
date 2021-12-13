@@ -65,16 +65,15 @@ app.post('/', function (req, res) {
         }
     }
 
+    if (selfInfo.wasHit) {
+        score = selfInfo.score;
+        move();
+        return;
+    }
 
     if (score < selfInfo.score) {
         score = selfInfo.score;
         shot();
-        return;
-    }
-
-    if (selfInfo.wasHit) {
-        score = selfInfo.score;
-        move();
         return;
     }
 
