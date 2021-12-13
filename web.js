@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const e = require('express');
 
 let score = 0;
 let shotLast = false;
@@ -21,7 +22,7 @@ app.post('/', function (req, res) {
 
     const move = () => {
         const changeDirection = ['R', 'L'];
-        let moves = ['F'];
+        let moves = ['F', 'F', 'R'];
 
         if (selfInfo.x < 3 && selfInfo.direction === 'W') {
             moves = moves.concat(changeDirection);
@@ -57,17 +58,13 @@ app.post('/', function (req, res) {
     }
 
     const tryToFind = () => {
-        if (shotLast && score === selfInfo.score) {
-            score = selfInfo.score;
+        if (shotLast) {
             move();
-        }
-
-        if (!shotLast) {
-            score = selfInfo.score;
+        } else {
             shot();
         }
-
     }
+
 
     if (score < selfInfo.score) {
         score = selfInfo.score;
@@ -78,6 +75,12 @@ app.post('/', function (req, res) {
     if (selfInfo.wasHit) {
         score = selfInfo.score;
         move();
+        return;
+    }
+
+    if (score >= selfInfo.score) {
+        score = selfInfo.score;
+        tryToFind();
         return;
     }
 
