@@ -25,19 +25,19 @@ app.post('/', function (req, res) {
         let moves = ['F', 'F', 'R'];
 
         if (selfInfo.x < 3 && selfInfo.direction === 'W') {
-            moves = moves.concat(changeDirection);
+            moves = changeDirection;
         }
 
         if (selfInfo.x > req.body.arena.dims[0] - 3 && selfInfo.direction === 'E') {
-            moves = moves.concat(changeDirection);
+            moves = changeDirection;
         }
 
         if (selfInfo.y < 3 && selfInfo.direction === 'N') {
-            moves = moves.concat(changeDirection);
+            moves = changeDirection;
         }
 
         if (selfInfo.x > req.body.arena.dims[1] - 3 && selfInfo.direction === 'S') {
-            moves = moves.concat(changeDirection);
+            moves = changeDirection;
         }
 
         shotLast = false;
