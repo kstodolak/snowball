@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 
 let score = 0;
+let shotLast = false;
 
 app.use(bodyParser.json());
 
@@ -38,10 +39,12 @@ app.post('/', function (req, res) {
             moves = moves.concat(changeDirection);
         }
 
+        shotLast = false;
         res.send(moves[Math.floor(Math.random() * moves.length)]);
     }
 
     const shot = () => {
+        shotLast = true;
         res.send('T')
     }
 
@@ -51,6 +54,19 @@ app.post('/', function (req, res) {
         } else {
             shot();
         }
+    }
+
+    const tryToFind = () => {
+        if (shotLast && score === selfInfo.score) {
+            score = selfInfo.score;
+            move();
+        }
+
+        if (!shotLast) {
+            score = selfInfo.score;
+            shot();
+        }
+
     }
 
     if (score < selfInfo.score) {
@@ -65,8 +81,9 @@ app.post('/', function (req, res) {
         return;
     }
 
-    score = selfInfo.score;
-    moveOrShot(Math.floor(Math.random() * 10));
+    tryToFind();
+    // score = selfInfo.score;
+    // moveOrShot(Math.floor(Math.random() * 10));
 });
 
 app.listen(process.env.PORT || 8080);
